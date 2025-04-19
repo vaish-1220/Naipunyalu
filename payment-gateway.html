@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Naipuṇyālu - Payment</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    .pay-btn {
+      padding: 12px 24px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .pay-btn:hover {
+      background-color: #005f7a;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Buy This Handcrafted Item</h2>
+  <p>Price: ₹499</p>
+  <button class="pay-btn" id="payButton">Pay Now</button>
+
+  <script>
+    document.getElementById('payButton').onclick = function (e) {
+      var options = {
+        "key": "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay Key ID
+        "amount": 49900, // Amount in paisa (₹499)
+        "currency": "INR",
+        "name": "Naipuṇyālu",
+        "description": "Payment for Handcrafted Product",
+        "image": "https://yourdomain.com/logo.png", // optional
+        "handler": function (response) {
+          alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+          // Optionally, send this response to your backend for verification
+        },
+        "prefill": {
+          "name": "Customer Name",
+          "email": "customer@example.com",
+          "contact": "9999999999"
+        },
+        "theme": {
+          "color": "#3399cc"
+        }
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+      e.preventDefault();
+    }
+  </script>
+</body>
+</html>
